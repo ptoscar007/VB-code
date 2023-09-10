@@ -1,0 +1,2681 @@
+Option Explicit
+Sub CreatePresentation()
+' Set a VBE reference to Microsoft PowerPoint Object Library
+
+Dim PPApp As PowerPoint.Application
+Dim PPPres As PowerPoint.Presentation
+Dim PPSlide As PowerPoint.Slide
+Dim PresentationFileName As Variant
+Dim SlideCount As Long
+'Dim iCht As Integer
+Dim sTitle As String
+Dim ws As Worksheet
+Dim cht As Chart
+Dim myPath As String
+Dim folderPath As String
+Dim myShapeRange As PowerPoint.Shape
+Const ppPasteDefault As Integer = 0
+Dim filename As String
+Dim networkname As String
+Dim datebef As String
+Dim dateaft As String
+Dim timebef As Integer
+Dim timeaft As Integer
+
+folderPath = Application.ActiveWorkbook.Path
+myPath = Application.ActiveWorkbook.FullName
+
+
+    networkname = InputBox(Prompt:="Please specify source of KPI data", _
+    Title:="Operator", Default:="e.g. Operator Country and Name, Clustername")
+
+
+    Set PPApp = New PowerPoint.Application
+    PPApp.Visible = True
+    PPApp.Activate
+    
+    'Set PPPres = PPApp.Presentations.Add
+
+
+' Reference existing instance of PowerPoint
+Set PPApp = GetObject(, "Powerpoint.Application")
+' Reference active presentation
+PPApp.Presentations.Open folderPath & "\OperatorName_Releasebefore_to_ReleaseAfter_KPI_PerformanceReport-YYYY-MM-DD_Ed1.4temp.pptx"
+Set PPPres = PPApp.ActivePresentation
+
+' Shows Slide only
+' PPApp.ActiveWindow.ViewType = ppViewSlide
+'
+'Write to the first shape on first slide
+Set myShapeRange = PPPres.Slides(1).Shapes(1)
+With myShapeRange.TextFrame.TextRange
+  '.Font.Size = 12
+  '.Font.Color = vbRed
+  '.Font.Underline = msoTrue
+  .Text = "Network performance report" & vbCrLf _
+         & networkname & " NPI"
+ End With
+
+Set myShapeRange = PPPres.Slides(1).Shapes(3)
+With myShapeRange.TextFrame.TextRange
+  '.Font.Size = 12
+  '.Font.Color = vbRed
+  '.Font.Underline = msoTrue
+  .Text = "Release Load – <Technology names> KPI Performance"
+ 
+End With
+
+PPApp.ActiveWindow.View.GotoSlide 2
+
+
+
+If ActiveSheet.Shapes("Check Box 13").ControlFormat.Value = 1 Then
+
+
+datebef = Worksheets("HighlevelSummary").Cells(50, 3).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 4).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 3).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 4).Value
+
+
+Range("AV76:AY95").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+    
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 410
+
+
+
+
+End If
+    
+
+If ActiveSheet.Shapes("Check Box 14").ControlFormat.Value = 1 Then
+
+Range("Az76:BC95").Copy
+    datebef = Worksheets("HighlevelSummary").Cells(50, 7).Value
+    dateaft = Worksheets("HighlevelSummary").Cells(50, 8).Value
+    timebef = Worksheets("HighlevelSummary").Cells(53, 7).Value
+    timeaft = Worksheets("HighlevelSummary").Cells(53, 8).Value
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 410
+
+
+
+End If
+
+If ActiveSheet.Shapes("Check Box 15").ControlFormat.Value = 1 Then
+
+Range("BD76:BG95").Copy
+
+datebef = Worksheets("HighlevelSummary").Cells(50, 11).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 12).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 11).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 12).Value
+
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 410
+
+
+End If
+
+If ActiveSheet.Shapes("Check Box 23").ControlFormat.Value = 1 Then
+
+Range("BH76:BK95").Copy
+
+datebef = Worksheets("HighlevelSummary").Cells(50, 15).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 16).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 15).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 16).Value
+
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 410
+
+
+
+
+End If
+
+If ActiveSheet.Shapes("Check Box 17").ControlFormat.Value = 1 Then
+
+Range("BL76:BO95").Copy
+
+datebef = Worksheets("HighlevelSummary").Cells(50, 19).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 20).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 19).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 20).Value
+
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 410
+
+
+End If
+
+If ActiveSheet.Shapes("Check Box 18").ControlFormat.Value = 1 Then
+
+Range("BP76:BS95").Copy
+ 
+datebef = Worksheets("HighlevelSummary").Cells(50, 23).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 24).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 23).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 24).Value
+
+   
+        SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " hours after " _
+    & datebef & " vs " & timeaft & " hours after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 410
+      
+    
+      
+End If
+
+
+If ActiveSheet.Shapes("Check Box 19").ControlFormat.Value = 1 Then
+
+Range("BT76:BW95").Copy
+
+datebef = Worksheets("HighlevelSummary").Cells(50, 27).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 28).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 27).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 28).Value
+
+    
+        SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " hours after " _
+    & datebef & " vs " & timeaft & " hours after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 410
+
+
+End If
+
+If ActiveSheet.Shapes("Check Box 20").ControlFormat.Value = 1 Then
+
+Range("BX76:CA95").Copy
+
+datebef = Worksheets("HighlevelSummary").Cells(50, 31).Value
+dateaft = Worksheets("HighlevelSummary").Cells(50, 32).Value
+timebef = Worksheets("HighlevelSummary").Cells(53, 31).Value
+timeaft = Worksheets("HighlevelSummary").Cells(53, 32).Value
+
+    
+        SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " measurement periods after " _
+    & datebef & " vs " & timeaft & " measurement periods after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 410
+       
+ 
+End If
+
+
+    
+
+If ActiveSheet.Shapes("Check Box 21").ControlFormat.Value = 1 Then
+
+
+        'Set PPSlide = PPApp.ActivePresentation.Slides(6).Duplicate.Item(-4)
+        'PPPres.Slides(SlideCount + 2).Select
+        
+       
+        'myShapeRange = PPPres.Slides(1).Shapes(1)
+        'With myShapeRange.TextFrame.TextRange
+        '.Text = "test"
+        'End With
+  
+    datebef = Worksheets("HighlevelSummary").Cells(50, 3).Value
+    dateaft = Worksheets("HighlevelSummary").Cells(50, 4).Value
+    timebef = Worksheets("HighlevelSummary").Cells(53, 3).Value
+    timeaft = Worksheets("HighlevelSummary").Cells(53, 4).Value
+    
+    Worksheets("Summary").Range("b5:f30").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 1"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+       
+    Worksheets("Summary").Range("b31:f60").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 2"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+       
+    Worksheets("Summary").Range("b61:f82").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 3"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+    
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+       
+     Worksheets("Summary").Range("b83:f101").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 4"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+    
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+       
+       
+End If
+
+
+
+
+If ActiveSheet.Shapes("Check Box 22").ControlFormat.Value = 1 Then
+
+  
+    datebef = Worksheets("HighlevelSummary").Cells(29, 31).Value
+    dateaft = Worksheets("HighlevelSummary").Cells(29, 32).Value
+    timebef = Worksheets("HighlevelSummary").Cells(32, 31).Value
+    timeaft = Worksheets("HighlevelSummary").Cells(32, 32).Value
+    
+    Worksheets("Summary").Range("ai5:am30").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 1"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " measurement periods after " _
+    & datebef & " vs " & timeaft & " measurement periods after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+       
+    Worksheets("Summary").Range("ai31:am60").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 2"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " measurement periods after " _
+    & datebef & " vs " & timeaft & " measurement periods after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+     'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+       
+    Worksheets("Summary").Range("ai61:am82").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 3"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " measurement periods after " _
+    & datebef & " vs " & timeaft & " measurement periods after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+   
+   'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+    
+    
+     Worksheets("Summary").Range("ai83:am101").Copy
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary 4"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing " & timebef & " days before " _
+    & datebef & " vs " & timeaft & " days after " & dateaft
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+    
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+       myShapeRange.Height = 250
+       myShapeRange.Width = 470
+    
+    
+    
+    
+End If
+
+If ActiveSheet.Shapes("Check Box 25").ControlFormat.Value = 1 Then
+
+
+
+dateaft = Worksheets("HighlevelSummary").Cells(29, 32).Value
+timeaft = Worksheets("HighlevelSummary").Cells(32, 32).Value
+
+
+
+Range("CB55:CE75").Copy
+
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 9, ppLayoutCustom)
+    
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "5G KPI Scorecard"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level comparing Out of Box values vs " _
+    & timeaft & " periods after " & dateaft
+    
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      'myShapeRange.Width = 470
+
+End If
+
+Call CopyCharts
+
+
+ PPPres.SaveAs folderPath & "\" & networkname & " _Releasebefore_to_ReleaseAfter_KPI_PerformanceReport-YYYY-MM-DD.pptx"
+ 'PPPres.SaveAs "D:\Data\Dienstlich\Reporting Suite\LTE\RL70\test ppt\Performance report.pptx"
+
+
+End Sub
+
+Sub CopyCharts()
+
+'#################
+'Start copy charts
+'#################
+
+Dim PPApp As PowerPoint.Application
+Dim PPPres As PowerPoint.Presentation
+Dim PPSlide As PowerPoint.Slide
+Dim PresentationFileName As Variant
+Dim SlideCount As Long
+'Dim iCht As Integer
+Dim sTitle As String
+Dim ws As Worksheet
+Dim cht As Chart
+Dim myPath As String
+Dim folderPath As String
+Dim myShapeRange As PowerPoint.Shape
+Const ppPasteDefault As Integer = 0
+Dim filename As String
+Dim networkname As String
+Dim datebef As String
+Dim dateaft As String
+Dim timebef As Integer
+Dim timeaft As Integer
+
+folderPath = Application.ActiveWorkbook.Path
+myPath = Application.ActiveWorkbook.FullName
+
+Set PPApp = New PowerPoint.Application
+PPApp.Visible = True
+PPApp.Activate
+ 
+
+' Reference existing instance of PowerPoint
+Set PPApp = GetObject(, "Powerpoint.Application")
+' Reference active presentation
+Set PPPres = PPApp.ActivePresentation
+
+PPApp.ActiveWindow.View.GotoSlide 2
+
+
+'Slide1
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+
+    PPSlide.Select
+    Diagramm1.ChartArea.Copy
+ 
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+           
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Cell Availability"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+'Slide1a
+
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+
+    PPSlide.Select
+    Diagramm4.ChartArea.Copy
+ 
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+           
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA Call Accessibility"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      
+'Slide1b
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+
+    PPSlide.Select
+    Chart12.ChartArea.Copy
+ 
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+           
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA Accessibility"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      
+'Slide1c
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+
+    PPSlide.Select
+    Chart15.ChartArea.Copy
+ 
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+           
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA QoS Flow Setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      
+'Slide1d
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+
+    PPSlide.Select
+    Chart14.ChartArea.Copy
+ 
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+           
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA PDU Sessions"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+
+      
+      
+
+'Slide2
+    Diagramm3.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+        
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+       
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "NSA Call Accessibility"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide3
+    Chart1.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "X2 Setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide4
+    Diagramm8.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+   
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SgNB addition"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide4a
+    Chart2.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+   
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SgNB reconfiguration"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide5
+    Chart3.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+        
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+            
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "RACH setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide5a
+    Chart10.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+        
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+            
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "RACH setup after SgNB additon"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide5b
+    Diagramm5.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+        
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+            
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "UE distance"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide5b
+    Chart8.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+        
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+            
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "RRC setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide5b
+    Chart9.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+        
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+            
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "RB setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide6
+    Chart4.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "UE context setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide7
+    Chart5.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "UE context modification"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide8
+    Chart6.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "NSA Admission Control"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      
+      
+ 'Slide8aa
+    Chart16.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA Admission Control"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+  
+  'Slide8ab
+    Chart17.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Rejection ratio due to lack up PUCCH resources"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      
+      
+'Slide8a
+    Chart11.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Release ratio due to RACH issue"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide8aa
+    Chart18.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA Drop ratio"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+
+'Slide8b
+    Diagramm50.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+       
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA normal release ratio gNB initiated"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+      
+
+'Slide9
+    Diagramm9.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+       
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SgNB release"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide10
+    Diagramm42.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+       
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SgNB abnormal release per connected hour"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide11
+    Diagramm10.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Abnormal SgNB release distribution"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide10
+    Chart7.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Normal SgNB release distribution"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide10a
+    Diagramm45.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "VoNR RRC"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide10aa
+    Diagramm58.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "VoNR Accessibility"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide10aa
+    Diagramm59.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "VoNR Drop Rate"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide10b
+    Diagramm46.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "VoNR DRB admission"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide10c
+    Diagramm60.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "VoNR traffic"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide10c
+    Diagramm47.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "VoNR traffic 2"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide12a
+    Diagramm37.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA intra Cell Handover"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      
+'Slide12b
+    Diagramm36.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA intra gNB intra DU Handover"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide12c
+    Diagramm35.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA intra gNB inter DU Handover"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide12d
+    Diagramm34.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA inter gNB Handover"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide12
+    Diagramm11.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "NSA intra gNB Handover"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide12a
+    Diagramm17.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "NSA inter gNB Handover"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide13
+    Diagramm12.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Block Error Rate"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide13
+    Diagramm51.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "RLC retransmission"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide14
+    Diagramm13.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "PDCP SDU Delay"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide15
+    Diagramm14.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Round trip delay"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide15a
+    Diagramm15.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "CQI"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide15c
+    Diagramm22.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SINR for PUSCH"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide15d
+    Diagramm23.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "RSSI"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+
+'Slide15e
+    Diagramm61.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Power Headroom"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+
+'Slide15a
+    Diagramm24.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "PDCP volume"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide15a
+    Diagramm33.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "SA PDCP volume"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide16
+    Diagramm7.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "MAC volume & Throughput"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide16a
+    Diagramm18.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "MAC Throughput considering UL/DL ratio"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide16b
+    Diagramm19.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "MAC Throughput in symbol time"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide16d
+    Diagramm25.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "MAC user throughput"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide16da
+    Diagramm54.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "IP user throughput DL"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide16db
+    Diagramm55.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "IP user throughput Uplink"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide16dc
+    Diagramm56.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Max IP throughput"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide16dd
+    Diagramm57.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Max cell throughput"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide16e
+    Diagramm20.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Average DL MCS and rank"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide16ea
+    Diagramm49.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Average UL MCS"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide16f
+    Diagramm21.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Ratio of rank4 and 256QAM"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide16g
+    Diagramm32.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "PRB utilization"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+  'Slide16ga
+    Diagramm52.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Slot utilization"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+      
+      'Slide16h
+    Diagramm29.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Spectral efficiency"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+      'Slide16i
+    Diagramm62.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "PDCCH"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide17
+    Diagramm26.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Average number of UEs with data in buffer"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide18
+    Diagramm27.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Max number of UEs with data in buffer"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide18a
+    Diagramm28.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Max number of NSA UEs"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+'Slide18a
+    Diagramm38.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Max number of SA UEs"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide18b
+    Diagramm53.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Control-Plane overload"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide19
+    Chart70.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "DL CA reconfiguration"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide20
+    Chart74.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "UL CA reconfiguration"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+
+
+'Slide21
+    Chart75.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "F1 setup"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide22a
+    Diagramm30.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "F1 and X2 Throughput"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide22b
+    Diagramm31.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "F1 data split"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide22
+    Diagramm44.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "DSS allocation"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide22
+    Diagramm16.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Number of object"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+'Slide22a
+    Diagramm39.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Number of alarms per severity"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+
+
+
+'Slide22b
+    Diagramm40.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Number of alarm duration per severity"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+    
+    'save
+    'PPPres.SaveAs folderPath & "\" & networkname & " Performance report.pptx"
+    
+    
+'Slide22c
+    Diagramm41.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+    
+       
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+
+       
+        
+        
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Number or alarms per alarm type"
+        PPSlide.Shapes.Placeholders(3).TextFrame.TextRange.Text = "No change in KPIs"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+  
+' Clean up
+Set PPSlide = Nothing
+Set PPPres = Nothing
+Set PPApp = Nothing
+
+
+
+End Sub
+
+
+
+
+Sub TestButton()
+
+' Set a VBE reference to Microsoft PowerPoint Object Library
+
+Dim PPApp As PowerPoint.Application
+Dim PPPres As PowerPoint.Presentation
+Dim PPSlide As PowerPoint.Slide
+Dim PresentationFileName As Variant
+Dim SlideCount As Long
+'Dim iCht As Integer
+Dim sTitle As String
+Dim ws As Worksheet
+Dim cht As Chart
+Dim myPath As String
+Dim folderPath As String
+Dim myShapeRange As PowerPoint.Shape
+Const ppPasteDefault As Integer = 0
+Dim filenamestring As String
+Dim networkname As String
+
+
+folderPath = Application.ActiveWorkbook.Path
+myPath = Application.ActiveWorkbook.FullName
+
+
+    networkname = InputBox(Prompt:="Please insert country and name of Operator", _
+          Title:="Operator", Default:="Operator Country and name")
+
+    Set PPApp = New PowerPoint.Application
+    PPApp.Visible = True
+    PPApp.Activate
+    
+    'Set PPPres = PPApp.Presentations.Add
+
+
+' Reference existing instance of PowerPoint
+Set PPApp = GetObject(, "Powerpoint.Application")
+' Reference active presentation
+PPApp.Presentations.Open folderPath & "\Performance report template.pptx"
+Set PPPres = PPApp.ActivePresentation
+
+' Shows Slide only
+' PPApp.ActiveWindow.ViewType = ppViewSlide
+'
+
+'Write to the first shape on first slide
+Set myShapeRange = PPPres.Slides(1).Shapes(1)
+With myShapeRange.TextFrame.TextRange
+  '.Font.Size = 12
+  '.Font.Color = vbRed
+  '.Font.Underline = msoTrue
+  .Text = "Network Performance Report." & vbCrLf _
+         & networkname
+
+End With
+
+'If ActiveSheet.Shapes("Check Box 13").ControlFormat.Value = 1 Then
+
+
+
+Range("AV52:AY65").Copy
+
+PPApp.ActiveWindow.View.GotoSlide 3
+    
+    Set PPSlide = PPPres.Slides.Add(3, ppLayoutCustom)
+    'PPSlide.Select
+    PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "KPI summary"
+    PPSlide.Shapes.Placeholders(2).TextFrame.TextRange.Text = "KPI level and deviation from before"
+            
+    PPSlide.Shapes.PasteSpecial ppPasteMetafilePicture
+       
+    Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+ 'End If
+    
+'Slide1
+    PPSlide.Select
+    Diagramm1.ChartArea.Copy
+    
+    SlideCount = PPPres.Slides.Count
+    Set PPSlide = PPPres.Slides.Add(SlideCount - 2, ppLayoutCustom)
+    
+    
+    PPApp.ActiveWindow.View.GotoSlide PPSlide.SlideIndex
+    
+           
+        PPSlide.Shapes.PasteSpecial(ppPasteDefault).Select
+        PPSlide.Shapes.Placeholders(1).TextFrame.TextRange.Text = "Cell Availability"
+        Set myShapeRange = PPSlide.Shapes(PPSlide.Shapes.Count)
+  
+    'Set position:
+      myShapeRange.Left = 33
+      myShapeRange.Top = 95
+      myShapeRange.Height = 250
+      myShapeRange.Width = 470
+    
+
+End Sub
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+
+End Sub
